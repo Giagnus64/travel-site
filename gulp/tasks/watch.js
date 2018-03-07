@@ -7,7 +7,7 @@ gulp.task('watch', function(){
 	//initialize browsersync server
 	browserSync.init({
 		//makes browsersync notifications dissappear
-		//notify: false,
+		notify: false,
 		server:{
 			baseDir:"app"
 		}
@@ -21,6 +21,10 @@ gulp.task('watch', function(){
 	watch('./app/assets/styles/**/*.css', function(){
 		gulp.start('cssInject');
 	});
+
+	watch('./app/assets/scripts/**/*.js', function(){
+		gulp.start('scriptsRefresh');
+	});
 });
 
 //new task for browsersync inject css - with styles task dependency
@@ -28,3 +32,8 @@ gulp.task('cssInject',['styles'], function(){
 	gulp.src('./app/temp/styles/styles.css')
 	.pipe(browserSync.stream());
 });
+
+//new task for browsersync to refresh after webpack repacks JS
+gulp.task('scriptsRefresh', ['scripts'], function(){
+	browserSync.reload();
+})
