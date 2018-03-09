@@ -5,7 +5,7 @@ del = require('del'),
 svg2png = require('gulp-svg2png');
 
 var config ={
-	shape:{
+	shape: {
 		spacing: {
 			padding: 1
 		}
